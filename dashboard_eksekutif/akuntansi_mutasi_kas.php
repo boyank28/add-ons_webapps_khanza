@@ -519,8 +519,8 @@ function renderFlowChart(matrix){
     if(_flowChart){_flowChart.destroy();}
     var top=matrix.slice(0,15);
     var labels=top.map(function(r){
-        var l=r.from_nm+' â†’ '+r.to_nm;
-        return l.length>35?l.substring(0,35)+'â€¦':l;
+        var l=r.from_nm+' -> '+r.to_nm;
+        return l.length>35?l.substring(0,35)+'...':l;
     });
     var vals=top.map(function(r){return r.total_mutasi;});
     var ctx=document.getElementById('flowChart').getContext('2d');
@@ -566,7 +566,7 @@ function renderTrendChart(trend){
 }
 </script>
 <script>
-/* â”€â”€â”€ DRILL-DOWN LEVEL 2: Modal Daftar Jurnal Transfer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* --- DRILL-DOWN LEVEL 2: Modal Daftar Jurnal Transfer --- */
 function openTrxModal(from_kd, from_nm, to_kd, to_nm){
     _curFromKd=from_kd; _curToKd=to_kd;
     if(!_modalTrx) _modalTrx=new bootstrap.Modal(document.getElementById('trx-modal'));
@@ -603,14 +603,14 @@ function openTrxModal(from_kd, from_nm, to_kd, to_nm){
     });
 }
 
-/* â”€â”€â”€ DRILL-DOWN LEVEL 3: Buku Besar (dari card saldo) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* --- DRILL-DOWN LEVEL 3: Buku Besar (dari card saldo) --- */
 function openBubesFromCard(kd_rek, nm_rek){
     _curBubesKd=kd_rek;
     var tgl1=$('#inp-tgl1').val(), tgl2=$('#inp-tgl2').val();
     openBubesModal(kd_rek, nm_rek, tgl1, tgl2);
 }
 
-/* â”€â”€â”€ DRILL-DOWN LEVEL 3: Buku Besar (dari modal transaksi) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* --- DRILL-DOWN LEVEL 3: Buku Besar (dari modal transaksi) --- */
 function openBubesFromTrx(no_jurnal){
     /* Dari daftar jurnal, buka buku besar rekening ASAL */
     var tgl1=$('#inp-tgl1').val(), tgl2=$('#inp-tgl2').val();
@@ -621,7 +621,7 @@ function openBubesFromTrx(no_jurnal){
 
 function openBubesModal(kd_rek, nm_rek, tgl1, tgl2){
     if(!_modalBubes) _modalBubes=new bootstrap.Modal(document.getElementById('bubes-modal'));
-    $('#bubes-modal-title').html('<i class="fas fa-book me-2 text-warning"></i>Buku Besar: <code class="text-white">'+kd_rek+'</code> â€” '+nm_rek);
+    $('#bubes-modal-title').html('<i class="fas fa-book me-2 text-warning"></i>Buku Besar: <code class="text-white">'+kd_rek+'</code> - '+nm_rek);
     $('#bubes-tbody').html('<tr><td colspan="8" class="text-center py-5"><div class="spinner-border spinner-border-sm text-warning"></div> Memuat histori...</td></tr>');
     _modalBubes.show();
     $.ajax({
@@ -660,7 +660,7 @@ function renderBubesTable(data){
     $('#bubes-tbody').html(html);
 }
 
-/* â”€â”€â”€ DRILL-DOWN LEVEL 4: Detail Jurnal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* --- DRILL-DOWN LEVEL 4: Detail Jurnal --- */
 function openDetail(no_jurnal){
     if(!no_jurnal) return;
     if(!_modalDetail) _modalDetail=new bootstrap.Modal(document.getElementById('detail-modal'),{backdrop:false});
@@ -733,7 +733,7 @@ function openTraceBukti(){
         });
 }
 
-/* â”€â”€â”€ EXPORT FUNCTIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* --- EXPORT FUNCTIONS --- */
 function exportFlowCSV(){
     if(!_mkData||!_mkData.flow_matrix){return;}
     var csv='Dari,Ke,Jumlah Transaksi,Total Mutasi\n';
